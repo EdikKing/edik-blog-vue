@@ -1,5 +1,5 @@
 <template>
-  <div id="addarticle" class="am-u-lg-3 am-animation-slide-right my-animation-delay-1" style="padding: 0px;margin-top: 10px">
+  <div id="addarticle" >
     <div class="am-u-lg-12 proright">
 
       <div class="am-u-lg-12 am-u-sm-12 am-u-md-12 " style="padding: 0;margin: 0px;">

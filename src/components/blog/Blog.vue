@@ -1,21 +1,61 @@
 <style lang="scss">
-  .sectionh4 {
-    border-bottom: 1px #0e90d2 solid;
-    padding-bottom: 5px;
-    margin-top: 16px;
+.section-bar {
+  // border-bottom: 1px #0e90d2 solid;
+  position: relative;
+  height: 28px;
+  line-height: 28px;
+  border-bottom: 1px solid #ddd;
+  margin-top: 16px;
+  font-weight: 400;
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background-color: #fff;
+  }
+  .section-title {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    border-bottom: 1px solid #4197c9;
+    height: 28px;
+    line-height: 28px;
+    color: #666;
+    font-size: 14px;
     .h4i {
       margin-right: 10px;
       color: #0e90d2;
     }
   }
+}
 
+  .blog {
+    position: relative;
+    .bloglist {
+      margin-right: 360px;
+    }
+    .blog-right {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 360px;
+    }
+  }
 </style>
 
 <template>
-  <div>
-    <div id="bloglist" class="am-u-lg-9 bloglist">
+  <div class="blog">
+
+    <div id="bloglist" class=" bloglist">
       <section>
-        <h4 class="sectionh4"><i class="am-icon-send am-icon-sm h4i"></i>最新文章</h4>
+        <div class="section-bar">
+          <h4 class="section-title"><i class="am-icon-send am-icon-sm h4i"></i>最新文章</h4>
+        </div>
+
+        <div style="height:16px;"></div>
 
         <ArticleListItem></ArticleListItem>
         <ArticleListItem></ArticleListItem>
@@ -35,22 +75,22 @@
       </div>
     </div>
 
-    <BlogRight></BlogRight>
+    <BlogRight class="blog-right" ></BlogRight>
 
   </div>
 </template>
 
 <script>
-  import ArticleListItem from 'components/blog/components/ArticleListItem'
-  import BlogRight from 'components/blog/components/BlogRight'
+import ArticleListItem from "components/blog/components/ArticleListItem";
+import BlogRight from "components/blog/components/BlogRight";
 
-  export default {
-    name: "Blog",
-    components: {ArticleListItem,BlogRight},
-    data: function () {
-      return {
-        msg: "Blog"
-      };
-    }
-  };
+export default {
+  name: "Blog",
+  components: { ArticleListItem, BlogRight },
+  data: function() {
+    return {
+      msg: "Blog"
+    };
+  }
+};
 </script>
