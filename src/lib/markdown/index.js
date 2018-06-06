@@ -23,13 +23,14 @@ const md = require('markdown-it')({
   .use(emoji)
   .use(anchor, {
     slugify,
-    permalink: true,
-    permalinkBefore: true,
-    permalinkSymbol: '#'
+    level: [1, 2, 3, 4],
+    // permalink: true,
+    // permalinkBefore: true,
+    // permalinkSymbol: '#'
   })
   .use(toc, {
     slugify,
-    includeLevel: [2, 3]
+    includeLevel: [1,2, 3,4]
   })
 
 export default md

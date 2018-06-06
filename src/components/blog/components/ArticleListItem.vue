@@ -12,7 +12,8 @@
       // box-shadow: #999 0px 0px 10px;
       z-index: 2;
       box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-      transform: translate3d(5px, -5px, 0);
+      transition: all 0.3s;
+      transform: translate3d(-8px, -3px, 0);
       // border: 1px solid #0e90d2;
       // -webkit-box-shadow: #0e90d2 0px 0px 10px;
       // -moz-box-shadow: #0e90d2 0px 0px 10px;

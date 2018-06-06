@@ -34,7 +34,7 @@
     <header id="amz-header" class="am-topbar am-topbar-inverse">
       <div class="am-container">
         <h1 class="am-topbar-brand" style="padding-left: 0px;padding-top: 13px;line-height: 0px;">
-          <a href="/"><img src="../assets/img/edik-logo.png" style="height: auto;width: 100px;"></a>
+          <a href="/"><img src="../../assets/img/edik-logo.png" style="height: auto;width: 100px;"></a>
         </h1>
 
         <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#doc-topbar-collapse'}">
@@ -87,7 +87,7 @@
         <a href="${U('/update')}" target="_blank" style="color: #B46DEF;">更新日志</a>
       </p>
       <p>
-        <img style="height: 30px;" src="../assets/img/txyaqrz.png">
+        <img style="height: 30px;" src="../../assets/img/txyaqrz.png">
       </p>
     </footer>
 
