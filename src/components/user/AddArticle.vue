@@ -151,9 +151,6 @@
   import SimpleMDE from 'simplemde'
   import markdown from '@/lib/markdown'
 
-  require('./inline-attachment.js')
-  require('./codemirror-4.inline-attachment.js')
-
   export default {
     name: 'add-article',
     methods: {
@@ -178,6 +175,23 @@
           'code', 'quote', 'unordered-list', 'clean-block', '|',
           'link', 'image', 'table', 'horizontal-rule', '|',
           'preview', 'guide',
+          {
+            name:'image',
+            action:function customFunction(editor) {
+              console.log('img')
+              var cm = editor.codemirror;
+
+              var startPoint = cm.getCursor("start");
+              var endPoint = cm.getCursor("end");
+
+              // cm.replaceSelection(start + text + end);
+
+              cm.setSelection(startPoint, endPoint);
+              cm.focus();
+            },
+            className: "fa fa-picture-o md-image",
+            title: "Custom Button",
+          },
           {
             name: "custom",
             action: function customFunction(editor) {
@@ -204,7 +218,7 @@
               // cm.setSelection('123', '456');
               cm.focus();
             },
-            className: "fa fa-star",
+            className: "fa fa-star custom",
             title: "Custom Button",
           }
         ],
@@ -217,42 +231,6 @@
           console.log(md)
           let result = markdown.render(md);
           return result;
-        }
-      });
-
-      inlineAttachment.editors.codemirror4.attach(this.simplemde, {
-        uploadUrl: 'http://127.0.0.1',
-        progressText: '![uploading file...]()',
-        urlText: '![]({filename})',
-        errorText: 'Error uploading file',
-        jsonFieldName: 'load',
-        uploadFieldName: 'load',
-        extraParams: {
-          'referrer': referrer || 'default upload image',
-        },
-        extraHeaders: {
-          'Authorization': 'Token ' + localStorage.getItem('authToken')
-        },
-        onFileUploadResponse: function (xhr) {
-          console.log('1234')
-          var result = JSON.parse(xhr.responseText),
-            filename = result[this.settings.jsonFieldName];
-
-          if (result && filename) {
-            var newValue;
-            if (typeof this.settings.urlText === 'function') {
-              newValue = this.settings.urlText.call(this, filename, result);
-            } else {
-              newValue = this.settings.urlText.replace(this.filenameTag, filename);
-            }
-            var text = this.editor.getValue().replace(this.lastValue, newValue);
-            this.editor.setValue(text);
-            this.settings.onFileUploaded.call(this, filename);
-          }
-          return false;
-        },
-        onFileUploadError: function (data) {
-          console.log('err', data);
         }
       });
 
