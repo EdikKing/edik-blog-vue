@@ -4,6 +4,7 @@
     background-color: #fff;
     margin-top: 20px;
      border: 1px #0E90D2 solid;
+    border-radius: 2px;
     /*border: 1px solid #eaeaea;*/
     &-title {
       padding-left: 10px;

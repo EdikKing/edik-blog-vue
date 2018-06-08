@@ -7,6 +7,7 @@
     display: flex;
     border: 1px rgb(231, 229, 229) solid;
     background-color: #fff;
+    border-radius: 3px;
 
     &:hover {
       // box-shadow: #999 0px 0px 10px;
@@ -29,6 +30,7 @@
       color: #fff;
       font-size: 14px;
       padding: 0px 10px;
+      border-radius: 0px 2px 2px 2px;
 
       .corner {
         position: absolute;
@@ -62,6 +64,7 @@
       height: 45px;
       background-color: #e5e5e5;
       background: rgba(204, 204, 204, 0.4);
+      border-radius: 1px 1px 1px 0px;
       // border: 1px rgba(204, 204, 204, 0.4) solid;
       text-align: center;
       line-height: 21px;
@@ -90,6 +93,7 @@
       .tem-img {
         width: 100%;
         height: 100%;
+        border-radius: 2px 2px 2px 2px;
       }
     }
 
