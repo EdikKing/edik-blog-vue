@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "amazeui": "^2.7.2",
+    "axios": "^0.18.0",
     "github-markdown-css": "^2.10.0",
     "normalize.css": "^8.0.0",
     "simplemde": "^1.11.2",

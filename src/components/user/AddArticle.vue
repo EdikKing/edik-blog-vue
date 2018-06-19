@@ -176,8 +176,8 @@
           'link', 'image', 'table', 'horizontal-rule', '|',
           'preview', 'guide',
           {
-            name:'image',
-            action:function customFunction(editor) {
+            name: 'image',
+            action: function customFunction(editor) {
               console.log('img')
               var cm = editor.codemirror;
 
@@ -233,7 +233,9 @@
           return result;
         }
       });
-
+      this.$http.get("user/article").then(res => {
+        console.log(res)
+      })
     }
   }
 </script>
