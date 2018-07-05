@@ -170,9 +170,6 @@
         let input = document.createElement("input")
         input.type = 'file'
         input.onchange = () => {
-          console.log('img change')
-          console.log(input.files[0])
-
           var reader = new FileReader();
           reader.onload = (file => {
             return e => {
