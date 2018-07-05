@@ -9,6 +9,7 @@ import 'amazeui/dist/css/amazeui.min.css'
 import 'github-markdown-css/github-markdown.css'
 import './styles/code.styl'
 import AjaxPlugin from './plugins/ajax'
+import {$http} from './plugins/ajax'
 import qs from 'qs'
 
 Vue.prototype.$qs = qs;
@@ -18,12 +19,19 @@ Vue.use(AjaxPlugin)
 
 // 注册一个全局自定义指令 `v-md`
 Vue.directive('md', {
-  // 当被绑定的元素插入到 DOM 中时……
-  inserted: function (el,binding) {
+  inserted: function (el, binding) {
   },
-  update:function (el,binding) {
-    // el.innerHTML = markdown.render(binding.value);
-    el.innerHTML = binding.value;
+  update: async function (el, binding) {
+    let html = await new Promise((resolve, reject) => {
+      try {
+        $http.post("https://markdown.edik.cn", {html: binding.value}).then(res => {
+          resolve(res);
+        })
+      } catch (error) {
+        reject(error);
+      }
+    });
+    el.innerHTML = html;
   }
 })
 

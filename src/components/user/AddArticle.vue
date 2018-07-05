@@ -88,7 +88,7 @@
         <div class=" am-form-group">
           <label for="doc-ipt-email-1">文章封面</label>
           <div id="uploader-demo">
-            <img src="https://dn-placeholder.qbox.me/260x170/4CD964/fff">
+            <img @click="upImg" :src="article.cover">
           </div>
 
         </div>
@@ -107,7 +107,7 @@
         <div class="am-form-group" v-cloak>
           <label for="articletype1">文章分类 <span class="am-icon-plus-circle" style="color: #0e90d2;cursor: pointer"></span> </label>
 
-          <select id="articletype1" >
+          <select id="articletype1">
             <option value="a.id"></option>
           </select>
           <span class="am-form-caret"></span>
@@ -149,15 +149,15 @@
 
 <script>
   import SimpleMDE from 'simplemde'
-  // import markdown from '@/lib/markdown'
 
   export default {
     name: 'add-article',
-    data: ()=> {
+    data: () => {
       return {
         article: {
-          title:'',
-          label:'',
+          cover: 'https://dn-placeholder.qbox.me/220x150/4CD964/fff',
+          title: '',
+          label: '',
           content: '',
           description: '',
           link: '',
@@ -165,22 +165,37 @@
       };
     },
     methods: {
+      upImg() {
+        console.log('123')
+        let input = document.createElement("input")
+        input.type = 'file'
+        input.onchange = () => {
+          console.log('img change')
+          console.log(input.files[0])
+
+          var reader = new FileReader();
+          reader.onload = (file => {
+            return e => {
+              this.article.cover = e.currentTarget.result
+            };
+          })(input.files[0]);
+
+          reader.readAsDataURL(input.files[0]);
+        }
+
+        input.click()
+      },
       get() {
         let value = this.simplemde.value();
         this.article.content = value
 
-        this.$http.post("/user/article/save", this.article).then(res => {
+        this.$http.post("/api/user/article/save", this.article).then(res => {
           console.log(res)
         })
-      },
-      html() {
-        // let value = this.simplemde.value();
-        // let result = md.render(value);
-        // console.log(result)
-        // this.$refs.showhtml.innerHTML = result
       }
     },
     mounted() {
+      let self = this
       this.simplemde = new SimpleMDE({
         element: document.getElementById('markdown_editor'),
         toolbar: [
@@ -241,9 +256,17 @@
         },
         // autoDownloadFontAwesome: false,
         status: ["autosave", "lines", "words", "cursor"],
-        previewRender: function (md) {
-          // let result = markdown.render(md);
-          return md;
+        previewRender: async function (md) {
+          let html = await new Promise((resolve, reject) => {
+            try {
+              self.$http.post("https://markdown.edik.cn", {html: md}).then(res => {
+                resolve(res);
+              })
+            } catch (error) {
+              reject(error);
+            }
+          });
+          return html;
         }
       });
       // this.$http.get("/user/article").then(res => {

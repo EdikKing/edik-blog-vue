@@ -142,8 +142,7 @@
       }
     },
     mounted() {
-      console.log(this.$route.params.id)
-      this.$http.get("/user/article", {params: {
+      this.$http.get("/api/user/article", {params: {
         id: this.$route.params.id
       }}).then(res => {
         this.article = res.data
