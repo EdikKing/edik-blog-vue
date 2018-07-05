@@ -139,7 +139,7 @@
         </div>
 
         <p>
-          <button type="submit" class="am-btn am-btn-primary">提交</button>
+          <button type="button" @click="get" class="am-btn am-btn-primary">提交</button>
         </p>
       </fieldset>
     </form>
@@ -156,7 +156,7 @@
     methods: {
       get() {
         let value = this.simplemde.value();
-        // console.log(value)
+        console.log(value)
       },
       html() {
         let value = this.simplemde.value();
