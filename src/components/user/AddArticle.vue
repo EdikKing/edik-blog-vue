@@ -82,7 +82,7 @@
 
         <div class="am-form-group">
           <label for="doc-ipt-email-1">标题</label>
-          <input type="text" name="article.title" class="" id="doc-ipt-email-1" placeholder="文章标题">
+          <input type="text" v-model="article.title" class="" id="doc-ipt-email-1" placeholder="文章标题">
         </div>
 
         <div class=" am-form-group">
@@ -96,18 +96,18 @@
 
         <div class="am-form-group">
           <label for="doc-ta-1">摘要</label>
-          <textarea name="article.description" rows="4" id="doc-ta-1"></textarea>
+          <textarea v-model="article.description" rows="4" id="doc-ta-1"></textarea>
         </div>
 
         <div class="am-form-group">
           <label for="label">标签,多个用逗号分隔,最多五个</label>
-          <input type="text" name="article.label" id="label" placeholder="文章标签" data-role="tagsinput">
+          <input type="text" v-model="article.label" id="label" placeholder="文章标签" data-role="tagsinput">
         </div>
 
         <div class="am-form-group" v-cloak>
           <label for="articletype1">文章分类 <span class="am-icon-plus-circle" style="color: #0e90d2;cursor: pointer"></span> </label>
 
-          <select id="articletype1" name="article.categoryid">
+          <select id="articletype1" >
             <option value="a.id"></option>
           </select>
           <span class="am-form-caret"></span>
@@ -128,7 +128,7 @@
 
         <div id="radio1" class="am-form-group " style="display: none">
           <label for="doc-ipt-email-7">原文链接</label>
-          <input type="text" name="article.link" class="" id="doc-ipt-email-7" placeholder="原文链接">
+          <input type="text" v-model="article.link" class="" id="doc-ipt-email-7" placeholder="原文链接">
         </div>
 
         <div class="am-form-group">
@@ -153,10 +153,25 @@
 
   export default {
     name: 'add-article',
+    data: ()=> {
+      return {
+        article: {
+          title:'',
+          label:'',
+          content: '',
+          description: '',
+          link: '',
+        }
+      };
+    },
     methods: {
       get() {
         let value = this.simplemde.value();
-        console.log(value)
+        this.article.content = value
+
+        this.$http.post("/user/article/save", this.article).then(res => {
+          console.log(res)
+        })
       },
       html() {
         let value = this.simplemde.value();
@@ -178,7 +193,7 @@
           {
             name: 'image',
             action: function customFunction(editor) {
-              console.log('img')
+              // console.log('img')
               var cm = editor.codemirror;
 
               var startPoint = cm.getCursor("start");
@@ -204,7 +219,6 @@
 
               var startPoint = cm.getCursor("start");
               var endPoint = cm.getCursor("end");
-
 
               text = cm.getSelection();
               if (text == '') text = 'This is a tip'
@@ -233,9 +247,9 @@
           return result;
         }
       });
-      this.$http.get("user/article").then(res => {
-        console.log(res)
-      })
+      // this.$http.get("/user/article").then(res => {
+      //   console.log(res)
+      // })
     }
   }
 </script>

@@ -9,9 +9,23 @@ import 'amazeui/dist/css/amazeui.min.css'
 import 'github-markdown-css/github-markdown.css'
 import './styles/code.styl'
 import AjaxPlugin from './plugins/ajax'
+import qs from 'qs'
+import markdown from '@/lib/markdown'
+
+Vue.prototype.$qs = qs;
 
 Vue.config.productionTip = false
 Vue.use(AjaxPlugin)
+
+// 注册一个全局自定义指令 `v-md`
+Vue.directive('md', {
+  // 当被绑定的元素插入到 DOM 中时……
+  inserted: function (el,binding) {
+  },
+  update:function (el,binding) {
+    el.innerHTML = markdown.render(binding.value);
+  }
+})
 
 /* eslint-disable no-new */
 new Vue({
