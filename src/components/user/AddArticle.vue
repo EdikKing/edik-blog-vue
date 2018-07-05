@@ -149,7 +149,7 @@
 
 <script>
   import SimpleMDE from 'simplemde'
-  import markdown from '@/lib/markdown'
+  // import markdown from '@/lib/markdown'
 
   export default {
     name: 'add-article',
@@ -174,10 +174,10 @@
         })
       },
       html() {
-        let value = this.simplemde.value();
-        let result = md.render(value);
+        // let value = this.simplemde.value();
+        // let result = md.render(value);
         // console.log(result)
-        this.$refs.showhtml.innerHTML = result
+        // this.$refs.showhtml.innerHTML = result
       }
     },
     mounted() {
@@ -242,9 +242,8 @@
         // autoDownloadFontAwesome: false,
         status: ["autosave", "lines", "words", "cursor"],
         previewRender: function (md) {
-          console.log(md)
-          let result = markdown.render(md);
-          return result;
+          // let result = markdown.render(md);
+          return md;
         }
       });
       // this.$http.get("/user/article").then(res => {

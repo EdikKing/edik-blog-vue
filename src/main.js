@@ -10,7 +10,6 @@ import 'github-markdown-css/github-markdown.css'
 import './styles/code.styl'
 import AjaxPlugin from './plugins/ajax'
 import qs from 'qs'
-import markdown from '@/lib/markdown'
 
 Vue.prototype.$qs = qs;
 
@@ -23,7 +22,8 @@ Vue.directive('md', {
   inserted: function (el,binding) {
   },
   update:function (el,binding) {
-    el.innerHTML = markdown.render(binding.value);
+    // el.innerHTML = markdown.render(binding.value);
+    el.innerHTML = binding.value;
   }
 })
 
